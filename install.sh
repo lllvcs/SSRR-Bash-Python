@@ -57,11 +57,11 @@ if [[ ${OS} == Debian ]];then
     apt-get install build-essential -y
 fi
 
-#Install SSR and SSR-Bash
+#Install SSRR and SSRR-Bash
 cd /usr/local
-git clone https://github.com/lllvcs/shadowsocksr.git
-git clone https://github.com/lllvcs/SSR-Bash-Python.git
-cd /usr/local/shadowsocksr
+git clone https://github.com/lllvcs/shadowsocksrr.git
+git clone https://github.com/lllvcs/SSRR-Bash-Python.git
+cd /usr/local/shadowsocksrr
 bash initcfg.sh
 
 #Install Libsodium
@@ -78,35 +78,35 @@ cd $workdir && rm -rf libsodium-$LIBSODIUM_VER.tar.gz libsodium-$LIBSODIUM_VER
 
 #Start when boot
 if [[ ${OS} == Ubuntu || ${OS} == Debian ]];then
-    cat >/etc/init.d/ssr-bash-python <<EOF
+    cat >/etc/init.d/ssrr-bash-python <<EOF
 #!/bin/sh
 ### BEGIN INIT INFO
-# Provides:          SSR-Bash_python
+# Provides:          SSRR-Bash_python
 # Required-Start: $local_fs $remote_fs
 # Required-Stop: $local_fs $remote_fs
 # Should-Start: $network
 # Should-Stop: $network
 # Default-Start:        2 3 4 5
 # Default-Stop:         0 1 6
-# Short-Description: SSR-Bash-Python
-# Description: SSR-Bash-Python
+# Short-Description: SSRR-Bash-Python
+# Description: SSRR-Bash-Python
 ### END INIT INFO
 iptables-restore < /etc/iptables.up.rules
-bash /usr/local/shadowsocksr/logrun.sh
+bash /usr/local/shadowsocksrr/logrun.sh
 EOF
-    chmod 755 /etc/init.d/ssr-bash-python
-    chmod +x /etc/init.d/ssr-bash-python
+    chmod 755 /etc/init.d/ssrr-bash-python
+    chmod +x /etc/init.d/ssrr-bash-python
     cd /etc/init.d
-    update-rc.d ssr-bash-python defaults 95
+    update-rc.d ssrr-bash-python defaults 95
 fi
 
 if [[ ${OS} == CentOS ]];then
     echo "
 iptables-restore < /etc/iptables.up.rules
-bash /usr/local/shadowsocksr/logrun.sh
-" > /etc/rc.d/init.d/ssr-bash-python
-    chmod +x  /etc/rc.d/init.d/ssr-bash-python
-    echo "/etc/rc.d/init.d/ssr-bash-python" >> /etc/rc.d/rc.local
+bash /usr/local/shadowsocksrr/logrun.sh
+" > /etc/rc.d/init.d/ssrr-bash-python
+    chmod +x  /etc/rc.d/init.d/ssrr-bash-python
+    echo "/etc/rc.d/init.d/ssrr-bash-python" >> /etc/rc.d/rc.local
     chmod +x /etc/rc.d/rc.local
 fi
 
@@ -138,15 +138,15 @@ systemctl restart iptables.service
 systemctl enable iptables.service
 fi
 
-#Install SSR-Bash Background
-wget -N --no-check-certificate -O /usr/local/bin/ssr https://raw.githubusercontent.com/lllvcs/SSR-Bash-Python/master/ssr
-chmod +x /usr/local/bin/ssr
+#Install SSRR-Bash Background
+wget -N --no-check-certificate -O /usr/local/bin/ssrr https://raw.githubusercontent.com/lllvcs/SSRR-Bash-Python/master/ssrr
+chmod +x /usr/local/bin/ssrr
 
-#Modify ShadowsocksR API
-sed -i "s/sspanelv2/mudbjson/g" /usr/local/shadowsocksr/userapiconfig.py
-sed -i "s/UPDATE_TIME = 60/UPDATE_TIME = 10/g" /usr/local/shadowsocksr/userapiconfig.py
-sed -i "s/SERVER_PUB_ADDR = '127.0.0.1'/SERVER_PUB_ADDR = '$(wget -qO- -t1 -T2 ipinfo.io/ip)'/" /usr/local/shadowsocksr/userapiconfig.py
+#Modify ShadowsocksRR API
+sed -i "s/sspanelv2/mudbjson/g" /usr/local/shadowsocksrr/userapiconfig.py
+sed -i "s/UPDATE_TIME = 60/UPDATE_TIME = 10/g" /usr/local/shadowsocksrr/userapiconfig.py
+sed -i "s/SERVER_PUB_ADDR = '127.0.0.1'/SERVER_PUB_ADDR = '$(wget -qO- -t1 -T2 ipinfo.io/ip)'/" /usr/local/shadowsocksrr/userapiconfig.py
 #INstall Success
-chmod +x -R /usr/local/SSR-Bash-Python/www/cgi-bin
-bash /usr/local/SSR-Bash-Python/self-check.sh
-echo '安装完成！输入 ssr 即可使用本程序~'
+chmod +x -R /usr/local/SSRR-Bash-Python/www/cgi-bin
+bash /usr/local/SSRR-Bash-Python/self-check.sh
+echo '安装完成！输入 ssrr 即可使用本程序~'

@@ -3,7 +3,7 @@
 import json
 import cgi
 
-f = file("/usr/local/shadowsocksr/mudb.json");
+f = file("/usr/local/shadowsocksrr/mudb.json");
 json = json.load(f);
 
 # 接受表达提交的数据

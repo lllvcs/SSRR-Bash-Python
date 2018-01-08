@@ -68,9 +68,13 @@ echo '4.auth_aes128_sha1'
 echo '5.verify_deflate'
 echo '6.auth_chain_a'
 echo '7.auth_chain_b'
+echo '8.auth_chain_c'
+echo '9.auth_chain_d'
+echo '10.auth_chain_e'
+echo '11.auth_chain_f'
 while :; do echo
 	read -p "输入协议方式： " ux
-	if [[ ! $ux =~ ^[1-7]$ ]]; then
+	if [[ ! $ux =~ ^[1-11]$ ]]; then
 		echo "输入错误! 请输入正确的数字!"
 	else
 		break	
@@ -144,6 +148,7 @@ if [[ $um == 9 ]];then
 	um1="salsa20"
 fi
 
+
 if [[ $ux == 1 ]];then
 	ux1="origin"
 fi
@@ -159,14 +164,25 @@ fi
 if [[ $ux == 5 ]];then
 	ux1="verify_deflate"
 fi
-
 if [[ $ux == 6 ]];then
 	ux1="auth_chain_a"
 fi
-
 if [[ $ux == 7 ]];then
 	ux1="auth_chain_b"
 fi
+if [[ $ux == 8 ]];then
+	ux1="auth_chain_c"
+fi
+if [[ $ux == 9 ]];then
+	ux1="auth_chain_d"
+fi
+if [[ $ux == 10 ]];then
+	ux1="auth_chain_e"
+fi
+if [[ $ux == 11 ]];then
+	ux1="auth_chain_f"
+fi
+
 
 if [[ $uo == 1 ]];then
 	uo1="plain"
@@ -244,9 +260,9 @@ if [[ ${OS} == CentOS ]];then
 fi
 
 
-#Run ShadowsocksR
+#Run ShadowsocksRR
 echo "用户添加成功！用户信息如下："
-cd /usr/local/shadowsocksr
+cd /usr/local/shadowsocksrr
 
 if [[ $iflimitspeed == y ]]; then
 	python mujson_mgr.py -a -u $uname -p $uport -k $upass -m $um1 -O $ux1 -o $uo1 -t $ut -S $us
@@ -255,13 +271,13 @@ else
 fi
 
 
-SSRPID=$(ps -ef|grep 'python server.py m' |grep -v grep |awk '{print $2}')
+SSRRPID=$(ps -ef|grep 'python server.py m' |grep -v grep |awk '{print $2}')
 if [[ $SSRPID == "" ]]; then
 	
 	if [[ ${OS} =~ ^Ubuntu$|^Debian$ ]];then
 		iptables-restore < /etc/iptables.up.rules
 	fi
 
-    bash /usr/local/shadowsocksr/logrun.sh
-	echo "ShadowsocksR服务器已启动"
+    bash /usr/local/shadowsocksrr/logrun.sh
+	echo "ShadowsocksRR服务器已启动"
 fi

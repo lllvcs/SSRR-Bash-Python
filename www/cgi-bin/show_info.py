@@ -7,8 +7,8 @@ import urllib2
 #取得本机外网IP
 myip = urllib2.urlopen('http://members.3322.org/dyndns/getip').read()
 myip=myip.strip()
-#加载SSR JSON文件
-f = file("/usr/local/shadowsocksr/mudb.json");
+#加载SSRR JSON文件
+f = file("/usr/local/shadowsocksrr/mudb.json");
 json = json.load(f);
 
 # 接受表达提交的数据

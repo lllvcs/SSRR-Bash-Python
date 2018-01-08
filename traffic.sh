@@ -11,7 +11,7 @@ echo "直接回车返回上级菜单"
 
 while :; do echo
 	read -p "请选择： " tc
-	[ -z "$tc" ] && ssr && break
+	[ -z "$tc" ] && ssrr && break
 	if [[ ! $tc =~ ^[1-3]$ ]]; then
 		echo "输入错误! 请输入正确的数字!"
 	else
@@ -20,9 +20,9 @@ while :; do echo
 done
 
 if [[ $tc == 1 ]];then
-	python /usr/local/SSR-Bash-Python/show_flow.py
+	python /usr/local/SSRR-Bash-Python/show_flow.py
 	echo ""
-	bash /usr/local/SSR-Bash-Python/traffic.sh
+	bash /usr/local/SSRR-Bash-Python/traffic.sh
 fi
 
 if [[ $tc == 2 ]];then
@@ -40,27 +40,27 @@ if [[ $tc == 2 ]];then
 
 	if [[ $lsid == 1 ]];then
 		read -p "输入用户名： " uid
-		cd /usr/local/shadowsocksr
+		cd /usr/local/shadowsocksrr
 		python mujson_mgr.py -c -u $uid
 		echo "已清空用户名为 ${uid} 的用户流量"
 	fi
 	
 	if [[ $lsid == 2 ]];then
 		read -p "输入端口号： " uid
-		cd /usr/local/shadowsocksr
+		cd /usr/local/shadowsocksrr
 		python mujson_mgr.py -c -p $uid
 		echo "已清空端口号为${uid} 的用户流量"
 	fi
 	echo ""
-	bash /usr/local/SSR-Bash-Python/traffic.sh
+	bash /usr/local/SSRR-Bash-Python/traffic.sh
 fi
 
 if [[ $tc == 3 ]];then
-	cd /usr/local/shadowsocksr
+	cd /usr/local/shadowsocksrr
 	python mujson_mgr.py -c
 	echo "已清空全部用户的流量使用记录"
 
 	echo ""
-	bash /usr/local/SSR-Bash-Python/traffic.sh
+	bash /usr/local/SSRR-Bash-Python/traffic.sh
 fi
 

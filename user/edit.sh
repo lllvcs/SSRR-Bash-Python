@@ -44,12 +44,12 @@ while :; do echo
 done
 if [[ $lsid == 1 ]];then
 	read -p "输入用户名： " uid
-	cd /usr/local/shadowsocksr
+	cd /usr/local/shadowsocksrr
 	python mujson_mgr.py -l -u $uid
 fi
 if [[ $lsid == 2 ]];then
 	read -p "输入端口号： " uid
-	cd /usr/local/shadowsocksr
+	cd /usr/local/shadowsocksrr
 	python mujson_mgr.py -l -p $uid
 fi
 
@@ -74,14 +74,14 @@ done
 
 if [[ $ec == 1 ]];then
 	read -p "输入密码： " upass
-	cd /usr/local/shadowsocksr
+	cd /usr/local/shadowsocksrr
 	if [[ $lsid == 1 ]];then
-		cd /usr/local/shadowsocksr
+		cd /usr/local/shadowsocksrr
 		python mujson_mgr.py -e -u $uid -k $upass
 		echo "用户名为 $uid 的用户密码已设置成 $upass"
 	fi
 	if [[ $lsid == 2 ]];then
-		cd /usr/local/shadowsocksr
+		cd /usr/local/shadowsocksrr
 		python mujson_mgr.py -e -p $uid -k $upass
 		echo "端口号为 $uid 的用户密码已设置成 $upass"
 	fi
@@ -133,14 +133,14 @@ if [[ $ec == 2 ]];then
 	if [[ $um == 9 ]];then
 		um1="salsa20"
 	fi
-	cd /usr/local/shadowsocksr
+	cd /usr/local/shadowsocksrr
 	if [[ $lsid == 1 ]];then
-		cd /usr/local/shadowsocksr
+		cd /usr/local/shadowsocksrr
 		python mujson_mgr.py -e -u $uid -m $um1
 		echo "用户名为 $uid 的加密方式已切换为 $um1"
 	fi
 	if [[ $lsid == 2 ]];then
-		cd /usr/local/shadowsocksr
+		cd /usr/local/shadowsocksrr
 		python mujson_mgr.py -e -p $uid -m $um1
 		echo "端口号为 $uid 的加密方式已切换为 $um1"
 	fi
@@ -154,10 +154,14 @@ if [[ $ec == 3 ]];then
 	echo '5.verify_deflate'
 	echo '6.auth_chain_a'
 	echo '7.auth_chain_b'
+	echo '8.auth_chain_c'
+	echo '9.auth_chain_d'
+	echo '10.auth_chain_e'
+	echo '11.auth_chain_f'
 
 	while :; do echo
 	read -p "输入协议方式： " ux
-	if [[ ! $ux =~ ^[1-7]$ ]]; then
+	if [[ ! $ux =~ ^[1-11]$ ]]; then
 		echo "输入错误! 请输入正确的数字!"
 	else
 		break	
@@ -176,7 +180,7 @@ if [[ $ec == 3 ]];then
 	fi
 
 	if [[ $ux == 1 ]];then
-	ux1="origin"
+		ux1="origin"
 	fi
 	if [[ $ux == 2 ]];then
 		ux1="auth_sha1_v4"
@@ -196,19 +200,32 @@ if [[ $ec == 3 ]];then
 	if [[ $ux == 7 ]];then
 		ux1="auth_chain_b"
 	fi
+	if [[ $ux == 8 ]];then
+		ux1="auth_chain_c"
+	fi
+	if [[ $ux == 9 ]];then
+		ux1="auth_chain_d"
+	fi
+	if [[ $ux == 10 ]];then
+		ux1="auth_chain_e"
+	fi
+	if [[ $ux == 11 ]];then
+		ux1="auth_chain_f"
+	fi
+
 
 	if [[ $ifprotocolcompatible == y ]]; then
 		ux1=${ux1}"_compatible"
 	fi
 
-	cd /usr/local/shadowsocksr
+	cd /usr/local/shadowsocksrr
 	if [[ $lsid == 1 ]];then
-		cd /usr/local/shadowsocksr
+		cd /usr/local/shadowsocksrr
 		python mujson_mgr.py -e -u $uid -O $ux1
 		echo "用户名为 $uid 的协议方式已更改为 $ux1"
 	fi
 	if [[ $lsid == 2 ]];then
-		cd /usr/local/shadowsocksr
+		cd /usr/local/shadowsocksrr
 		python mujson_mgr.py -e -p $uid -O $ux1
 		echo "端口号为 $uid 的协议方式已更改为 $ux1"
 	fi
@@ -256,42 +273,42 @@ if [[ $ec == 4 ]];then
 		uo1=${uo1}"_compatible"
 	fi
 	
-	cd /usr/local/shadowsocksr
+	cd /usr/local/shadowsocksrr
 	if [[ $lsid == 1 ]];then
-		cd /usr/local/shadowsocksr
+		cd /usr/local/shadowsocksrr
 		python mujson_mgr.py -e -u $uid -o $uo1
 		echo "用户名为 $uid 的混淆方式已更改为 $uo1"
 	fi
 	if [[ $lsid == 2 ]];then
-		cd /usr/local/shadowsocksr
+		cd /usr/local/shadowsocksrr
 		python mujson_mgr.py -e -p $uid -o $uo1
 		echo "端口号为 $uid 的混淆方式已更改为 $uo1"
 	fi
 fi
 if [[ $ec == 5 ]];then
 	read -p "输入协议参数： " ux2
-	cd /usr/local/shadowsocksr
+	cd /usr/local/shadowsocksrr
 	if [[ $lsid == 1 ]];then
-		cd /usr/local/shadowsocksr
+		cd /usr/local/shadowsocksrr
 		python mujson_mgr.py -e -u $uid -G $ux2
 		echo "用户名为 $uid 的协议参数已更改为 $ux2"
 	fi
 	if [[ $lsid == 2 ]];then
-		cd /usr/local/shadowsocksr
+		cd /usr/local/shadowsocksrr
 		python mujson_mgr.py -e -p $uid -G $ux2
 		echo "端口号为 $uid 的协议参数已更改为 $ux2"
 	fi
 fi
 if [[ $ec == 6 ]];then
 	read -p "输入混淆参数： " uo2
-	cd /usr/local/shadowsocksr
+	cd /usr/local/shadowsocksrr
 	if [[ $lsid == 1 ]];then
-		cd /usr/local/shadowsocksr
+		cd /usr/local/shadowsocksrr
 		python mujson_mgr.py -e -u $uid -g $uo2
 		echo "用户名为 $uid 的混淆参数已更改为 $uo2"
 	fi
 	if [[ $lsid == 2 ]];then
-		cd /usr/local/shadowsocksr
+		cd /usr/local/shadowsocksrr
 		python mujson_mgr.py -e -p $uid -g $uo2
 		echo "端口号为 $uid 的混淆参数已更改为 $uo2"
 	fi
@@ -305,28 +322,28 @@ if [[ $ec == 7 ]];then
 			echo 'Input Error! Please Try Again!'
 		fi
 	done
-	cd /usr/local/shadowsocksr
+	cd /usr/local/shadowsocksrr
 	if [[ $lsid == 1 ]];then
-		cd /usr/local/shadowsocksr
+		cd /usr/local/shadowsocksrr
 		python mujson_mgr.py -e -u $uid -t $ut
 		echo "用户名为 $uid 的流量限制已改为 $ut"
 	fi
 	if [[ $lsid == 2 ]];then
-		cd /usr/local/shadowsocksr
+		cd /usr/local/shadowsocksrr
 		python mujson_mgr.py -e -p $uid -t $ut
 		echo "端口号为 $uid 的流量限制已改为 $ut"
 	fi
 fi
 if [[ $ec == 8 ]];then
 	read -p "输入端口限制（如1~80和90~100输入"1-80,90-100"）： " ub
-	cd /usr/local/shadowsocksr
+	cd /usr/local/shadowsocksrr
 	if [[ $lsid == 1 ]];then
-		cd /usr/local/shadowsocksr
+		cd /usr/local/shadowsocksrr
 		#python mujson_mgr.py -e -u $uid -f $ub
 		echo "此功能目前无法使用"
 	fi
 	if [[ $lsid == 2 ]];then
-		cd /usr/local/shadowsocksr
+		cd /usr/local/shadowsocksrr
 		#python mujson_mgr.py -e -p $uid -f $ub
 		echo "此功能目前无法使用"
 	fi
@@ -341,14 +358,14 @@ if [[ $ec == 9 ]];then
 	   		echo 'Input Error!'
 		fi
 	done
-	cd /usr/local/shadowsocksr
+	cd /usr/local/shadowsocksrr
 	if [[ $lsid == 1 ]];then
-		cd /usr/local/shadowsocksr
+		cd /usr/local/shadowsocksrr
 		python mujson_mgr.py -e -u $uid -S $us
 		echo "用户名为 $uid 的用户端口限速已修改为 $us KB/s"
 	fi
 	if [[ $lsid == 2 ]];then
-		cd /usr/local/shadowsocksr
+		cd /usr/local/shadowsocksrr
 		python mujson_mgr.py -e -p $uid -S $us
 		echo "端口号为 $uid 的用户端口限速已修改为 $us KB/s"
 	fi

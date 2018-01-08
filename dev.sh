@@ -23,5 +23,5 @@ if [[ $devc == 1 ]];then
 fi
 
 if [[ $devc == 2 ]];then
-	nohup tail -F /usr/local/shadowsocksr/ssserver.log | python autoban.py >log 2>log &
+	nohup tail -F /usr/local/shadowsocksrr/ssserver.log | python autoban.py >log 2>log &
 fi

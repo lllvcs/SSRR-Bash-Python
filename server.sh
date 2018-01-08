@@ -45,7 +45,7 @@ echo "直接回车返回上级菜单"
 
 while :; do echo
 	read -p "请选择： " serverc
-	[ -z "$serverc" ] && ssr && break
+	[ -z "$serverc" ] && ssrr && break
 	if [[ ! $serverc =~ ^[1-9]$ ]]; then
 		echo "输入错误! 请输入正确的数字!"
 	else
@@ -54,38 +54,38 @@ while :; do echo
 done
 
 if [[ $serverc == 1 ]];then
-	bash /usr/local/shadowsocksr/logrun.sh
+	bash /usr/local/shadowsocksrr/logrun.sh
 	iptables-restore < /etc/iptables.up.rules
 	clear
-	echo "ShadowsocksR服务器已启动"
+	echo "ShadowsocksRR服务器已启动"
 	echo ""
-	bash /usr/local/SSR-Bash-Python/server.sh
+	bash /usr/local/SSRR-Bash-Python/server.sh
 fi
 
 if [[ $serverc == 2 ]];then
-	bash /usr/local/shadowsocksr/stop.sh
-	echo "ShadowsocksR服务器已停止"
+	bash /usr/local/shadowsocksrr/stop.sh
+	echo "ShadowsocksRR服务器已停止"
 	echo ""
-	bash /usr/local/SSR-Bash-Python/server.sh
+	bash /usr/local/SSRR-Bash-Python/server.sh
 fi
 
 if [[ $serverc == 3 ]];then
-	bash /usr/local/shadowsocksr/stop.sh
-	bash /usr/local/shadowsocksr/logrun.sh
+	bash /usr/local/shadowsocksrr/stop.sh
+	bash /usr/local/shadowsocksrr/logrun.sh
 	iptables-restore < /etc/iptables.up.rules
 	clear
-	echo "ShadowsocksR服务器已重启"
+	echo "ShadowsocksRR服务器已重启"
 	echo ""
-	bash /usr/local/SSR-Bash-Python/server.sh
+	bash /usr/local/SSRR-Bash-Python/server.sh
 fi
 
 if [[ $serverc == 4 ]];then
-	bash /usr/local/shadowsocksr/tail.sh
+	bash /usr/local/shadowsocksrr/tail.sh
 fi
 
 if [[ $serverc == 5 ]];then
 	ps aux|grep server.py
-	bash /usr/local/SSR-Bash-Python/server.sh
+	bash /usr/local/SSRR-Bash-Python/server.sh
 fi
 
 if [[ $serverc == 6 ]];then
@@ -95,7 +95,7 @@ if [[ $serverc == 6 ]];then
 	echo "nameserver $ifdns2" >> /etc/resolv.conf
 	echo "DNS 服务器已设置为  $ifdns1 $ifdns2"
 	echo ""
-	bash /usr/local/SSR-Bash-Python/server.sh
+	bash /usr/local/SSRR-Bash-Python/server.sh
 fi
 
 if [[ $serverc == 7 ]];then
@@ -132,11 +132,11 @@ if [[ $serverc == 7 ]];then
 	#Get IP
 	ip=`curl -m 10 -s http://members.3322.org/dyndns/getip`
 	clear
-	cd /usr/local/SSR-Bash-Python/www
+	cd /usr/local/SSRR-Bash-Python/www
 	screen -dmS webcgi python -m CGIHTTPServer $cgiport
 	echo "WEB服务启动成功，请访问 http://${ip}:$cgiport"
 	echo ""
-	bash /usr/local/SSR-Bash-Python/server.sh
+	bash /usr/local/SSRR-Bash-Python/server.sh
 fi
 
 if [[ $serverc == 8 ]];then
@@ -146,44 +146,44 @@ if [[ $serverc == 8 ]];then
 	clear
 	echo "WEB服务已关闭！"
 	echo ""
-	bash /usr/local/SSR-Bash-Python/server.sh
+	bash /usr/local/SSRR-Bash-Python/server.sh
 fi
 
 if [[ $serverc == 9 ]];then
 	if [[ ${OS} == Ubuntu || ${OS} == Debian ]];then
-    	cat >/etc/init.d/ssr-bash-python <<EOF
+    	cat >/etc/init.d/ssrr-bash-python <<EOF
 #!/bin/sh
 ### BEGIN INIT INFO
-# Provides:          SSR-Bash_python
+# Provides:          SSRR-Bash_python
 # Required-Start: $local_fs $remote_fs
 # Required-Stop: $local_fs $remote_fs
 # Should-Start: $network
 # Should-Stop: $network
 # Default-Start:        2 3 4 5
 # Default-Stop:         0 1 6
-# Short-Description: SSR-Bash-Python
-# Description: SSR-Bash-Python
+# Short-Description: SSRR-Bash-Python
+# Description: SSRR-Bash-Python
 ### END INIT INFO
 iptables-restore < /etc/iptables.up.rules
-bash /usr/local/shadowsocksr/logrun.sh
+bash /usr/local/shadowsocksrr/logrun.sh
 EOF
-    	chmod 755 /etc/init.d/ssr-bash-python
-    	chmod +x /etc/init.d/ssr-bash-python
+    	chmod 755 /etc/init.d/ssrr-bash-python
+    	chmod +x /etc/init.d/ssrr-bash-python
     	cd /etc/init.d
-    	update-rc.d ssr-bash-python defaults 95
+    	update-rc.d ssrr-bash-python defaults 95
 	fi
 
 	if [[ ${OS} == CentOS ]];then
     	echo "
 iptables-restore < /etc/iptables.up.rules
-bash /usr/local/shadowsocksr/logrun.sh
-" > /etc/rc.d/init.d/ssr-bash-python
-    	chmod +x  /etc/rc.d/init.d/ssr-bash-python
-    	echo "/etc/rc.d/init.d/ssr-bash-python" >> /etc/rc.d/rc.local
+bash /usr/local/shadowsocksrr/logrun.sh
+" > /etc/rc.d/init.d/ssrr-bash-python
+    	chmod +x  /etc/rc.d/init.d/ssrr-bash-python
+    	echo "/etc/rc.d/init.d/ssrr-bash-python" >> /etc/rc.d/rc.local
     	chmod +x /etc/rc.d/rc.local
 	fi
 	echo "开机启动设置完成！"
         echo ""
-	bash /usr/local/SSR-Bash-Python/server.sh
+	bash /usr/local/SSRR-Bash-Python/server.sh
 fi
 

@@ -17,13 +17,13 @@ while :; do echo
 done
 if [[ $lsid == 1 ]];then
 	read -p "输入用户名： " uid
-	cd /usr/local/shadowsocksr
+	cd /usr/local/shadowsocksrr
 	python mujson_mgr.py -d -u $uid
 	echo "已成功删除用户名为 $uid 的用户流量"
 fi
 if [[ $lsid == 2 ]];then
 	read -p "输入端口号： " uid
-	cd /usr/local/shadowsocksr
+	cd /usr/local/shadowsocksrr
 	python mujson_mgr.py -d -p $uid
 	echo "已成功删除端口号为 $uid 的用户流量"
 fi

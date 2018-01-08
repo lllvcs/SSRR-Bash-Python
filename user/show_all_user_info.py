@@ -1,7 +1,7 @@
 # -*- coding:utf-8 -*-  
 import json
 
-f = file("/usr/local/shadowsocksr/mudb.json");
+f = file("/usr/local/shadowsocksrr/mudb.json");
 
 json = json.load(f);
 
