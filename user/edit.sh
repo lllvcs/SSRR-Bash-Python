@@ -147,22 +147,22 @@ if [[ $ec == 2 ]];then
 fi
 if [[ $ec == 3 ]];then
 	echo "协议方式"
-	echo '1.origin'
-	echo '2.auth_sha1_v4'
-	echo '3.auth_aes128_md5'
-	echo '4.auth_aes128_sha1'
-	echo '5.verify_deflate'
-	echo '6.auth_chain_a'
-	echo '7.auth_chain_b'
-	echo '8.auth_chain_c'
-	echo '9.auth_chain_d'
-	echo '10.auth_chain_e'
-	echo '11.auth_chain_f'
+	echo 'a.origin'
+	echo 'b.auth_sha1_v4'
+	echo 'c.auth_aes128_md5'
+	echo 'd.auth_aes128_sha1'
+	echo 'e.verify_deflate'
+	echo 'f.auth_chain_a'
+	echo 'g.auth_chain_b'
+	echo 'h.auth_chain_c'
+	echo 'i.auth_chain_d'
+	echo 'j.auth_chain_e'
+	echo 'k.auth_chain_f'
 
 	while :; do echo
 	read -p "输入协议方式： " ux
-	if [[ ! $ux =~ ^[1-11]$ ]]; then
-		echo "输入错误! 请输入正确的数字!"
+	if [[ ! $ux =~ ^[a-k]$ ]]; then
+		echo "输入错误! 请输入正确的字母!"
 	else
 		break	
 	fi
@@ -179,37 +179,37 @@ if [[ $ec == 3 ]];then
 	done
 	fi
 
-	if [[ $ux == 1 ]];then
+	if [[ $ux == a ]];then
 		ux1="origin"
 	fi
-	if [[ $ux == 2 ]];then
+	if [[ $ux == b ]];then
 		ux1="auth_sha1_v4"
 	fi
-	if [[ $ux == 3 ]];then
+	if [[ $ux == c ]];then
 		ux1="auth_aes128_md5"
 	fi
-	if [[ $ux == 4 ]];then
+	if [[ $ux == d ]];then
 		ux1="auth_aes128_sha1"
 	fi
-	if [[ $ux == 5 ]];then
+	if [[ $ux == e ]];then
 		ux1="verify_deflate"
 	fi
-	if [[ $ux == 6 ]];then
+	if [[ $ux == f ]];then
 		ux1="auth_chain_a"
 	fi
-	if [[ $ux == 7 ]];then
+	if [[ $ux == g ]];then
 		ux1="auth_chain_b"
 	fi
-	if [[ $ux == 8 ]];then
+	if [[ $ux == h ]];then
 		ux1="auth_chain_c"
 	fi
-	if [[ $ux == 9 ]];then
+	if [[ $ux == i ]];then
 		ux1="auth_chain_d"
 	fi
-	if [[ $ux == 10 ]];then
+	if [[ $ux == j ]];then
 		ux1="auth_chain_e"
 	fi
-	if [[ $ux == 11 ]];then
+	if [[ $ux == k ]];then
 		ux1="auth_chain_f"
 	fi
 
